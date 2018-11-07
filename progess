@@ -1,0 +1,53 @@
+able to collect real time tweets for the time run, but have to filter the tweets based on the activity and keywords. 
+
+done collecting real time tweets using keyword filters.
+
+command to compile:
+g++ -std=c++11 <cpp_file> -lcurl -loauth -ljsoncpp
+
+latest file twitter_dataprogess.cpp
+
+to do:
+
+collection of tweets in real time filtering through the keyword and limiting the listen time - done 
+
+to make a 2 dimensional array (hashmap implemented as key value pairs <string, long*>) from the activity timeline of the collected tweets. - done (using hashmap with (ID) and (vector long array) as a pair)
+
+find the active number of users using a limit for the activity. simply put put a minimum limit on the number of posts - function written but postponed till server access 
+
+Now do lagged correlation for each user with a particular random series "r" and hash the users into hash buckets using the random time series (How many buckets should be there should it be constant or dependent on the listening time) - done (implemented dynamic number of buckets look into it again after the experiments).
+
+Here the suspicious users or the qualified users are the ones who have occurred W/4 times in the same bucket and the qualified buckets are the ones which have W/4 qualified users. - 
+
+Now listen to the suspicious users without the filter words for a particular interval and users which are below ca certain limit can be neglected.
+
+To validate the suspicious users do pairwise contrained warped correlation (using the same maximum lag used before) and cluster the users hierarchically, policy used in clustering the single linkage technique which merges the closest pairs of the clusters iteratively. 
+
+Constants used in the paper are:
+
+Number of buckets : 5000
+base window : 2 hours
+maximum lag : 20 seconds
+
+Important notes to keep in mind:
+
+The storage of the vector is handled automatically, being expanded and contracted as needed. Vectors usually occupy more space than static arrays, because more memory is allocated to handle future growth. This way a vector does not need to reallocate each time an element is inserted, but only when the additional memory is exhausted. The total amount of allocated memory can be queried using capacity() function. Extra memory can be returned to the system via a call to shrink_to_fit(). (since C++11)
+
+used a memory struct for getting the twitter feed from the curl this has fields char* and size_t;
+
+a hashmap containing string and vector<long> for storing user activity;
+
+a hashmap containing int and vector<long> for hash_buckets; 
+
+
+
+Plan for a constant surveillance :
+
+implement background timeline activity and hashing them into buckets.
+
+server login : surgeon
+
+ssh sbiji001@bolt.cs.ucr.edu
+Thrust@333
+ssh sbiji001@surgeonn.cs.ucr.edu
+Thrust@333
